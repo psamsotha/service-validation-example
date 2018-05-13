@@ -28,6 +28,16 @@ do three things:
 
 A complete example can be seen in the integration test `ServiceValidationTest`.
 
+>**Note:** If you look at implementation of the `ValidationMethodInterceptor`,
+you will see that when there are constraint violations, I only throw 
+an `IllegalArgumentException`. I thought about throwing `ConstraintViolationExceotion`,
+but I don't think this is the best solution as the `ConstraintViolationException`
+with Jersey is tied to client request beans and the constraint violations are
+mapped to 400 Bad Request, meaning a client error. If we are talking
+about the service level, it's possible that the error is not a client error,
+but a problem internally. If you want you can just throw a `ConstraintViolationException`,
+it's up to you.
+
 
 
 
